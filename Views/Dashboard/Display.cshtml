@@ -1,0 +1,67 @@
+﻿@model List<TechnoBlogs.Models.Domain.BlogPost>
+@{
+	string user = User.Identity.Name;
+}
+
+@*WeleCome @user*@
+
+<h1>Blogs</h1>
+
+@*@foreach (var blog in Model)
+{
+        <div class="blog-item">
+            <h2>@blog.Heading</h2>
+            <p>Published on: @blog.PublishedDate.ToString("MMMM dd, yyyy") by @blog.Author</p>
+            <p>@blog.ShortDescription</p>
+            <div>
+            @Html.Raw(blog.Content) <!-- Displaying raw HTML content -->
+            </div>
+            <hr />
+        </div>
+}*@
+
+<style>
+    /* Styles for the blog grid container */
+    .blog-grid {
+        display: flex;
+        flex-wrap: wrap;
+        margin: -15px; /* To counteract the padding of individual items */
+    }
+
+    /* Styles for each blog item in the grid */
+    .blog-item {
+        width: calc(33.33% - 30px); /* Three items per row */
+        padding: 15px;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 15px;
+        background-color: #f9f9f9;
+        transition: background-color 0.2s ease;
+    }
+
+        .blog-item:hover {
+            background-color: #f0f0f0;
+        }
+
+    /* Other styles remain the same as in the previous example */
+</style>
+
+<div class="blog-grid">
+    @foreach (var blog in Model)
+    {
+        <div class="blog-item">
+            <h2 class="blog-title">@blog.Heading</h2>
+            <p class="blog-metadata">
+                Published on: <span class="published-date">@blog.PublishedDate.ToString("MMMM dd, yyyy")</span>
+                by <span class="author">@blog.Author</span>
+            </p>
+            <p class="blog-description"><strong>@blog.ShortDescription</strong></p>
+            <div class="blog-content">
+                @Html.Raw(blog.Content)
+            </div>
+        </div>
+    }
+</div>
+
+
